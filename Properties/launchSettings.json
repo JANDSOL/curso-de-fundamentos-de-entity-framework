@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "curso_de_fundamentos_de_entity_framework": {
+    "proj_tareas_categ": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
