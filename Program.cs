@@ -4,7 +4,8 @@ using proj_tareas_categ.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ContextTasks>(p => p.UseInMemoryDatabase("TasksDB"));
+// builder.Services.AddDbContext<ContextTasks>(p => p.UseInMemoryDatabase("TasksDB"));
+builder.Services.AddSqlServer<ContextTasks>("Data Source=JUAN-IS-COMPUTE\\JANDRADES;Initial Catalog=TasksDb;Trusted_Connection=True; Integrated Security=True");
 
 var app = builder.Build();
 

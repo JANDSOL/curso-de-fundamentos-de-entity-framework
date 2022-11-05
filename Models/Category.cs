@@ -15,7 +15,7 @@ namespace proj_tareas_categ.Models
         public string Name { get; set; }
 
         [MaxLength(500, ErrorMessage = "¡Superaste el límite de caracteres!")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public virtual ICollection<Task> Tasks { get; set; }
     }

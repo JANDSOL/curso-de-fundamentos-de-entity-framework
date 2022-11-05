@@ -20,16 +20,16 @@ namespace proj_tareas_categ.Models
         public string Title { get; set; }
 
         [MaxLength(500, ErrorMessage = "¡Superaste el límite de caracteres!")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
-        public Priority PriorityTask { get; set; } = Priority.Low;
+        public Priority PriorityTask { get; set; }
 
         [DataType(DataType.DateTime)]
         [DisplayFormat(
             ApplyFormatInEditMode = true,
             DataFormatString = "{g}")
         ]
-        public DateTime CreationDate { get; set; } = DateTime.Now;
+        public DateTime CreationDate { get; set; }
 
         public virtual Category Category { get; set; }
 
