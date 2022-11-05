@@ -12,25 +12,44 @@ namespace proj_tareas_categ.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Models.Task>()
-                .Property(prop => prop.TaskId)
-                .HasDefaultValueSql("NEWID()");
-            modelBuilder.Entity<Models.Task>()
-                .Property(prop => prop.Description)
-                .HasDefaultValue("");
-            modelBuilder.Entity<Models.Task>()
-                .Property(prop => prop.PriorityTask)
-                .HasDefaultValue(Priority.Low);
-            modelBuilder.Entity<Models.Task>()
-                .Property(prop => prop.CreationDate)
-                .HasDefaultValueSql("GETDATE()");
+            modelBuilder.Entity<Category>(eCategory =>
+            {
+                eCategory.ToTable("Category");
+                eCategory.HasKey(p => p.CategoryId);
+                eCategory.Property(p => p.CategoryId)
+                    .HasDefaultValueSql("NewId()");
+                eCategory.Property(p => p.Name)
+                    .IsRequired()
+                    .HasMaxLength(150);
+                eCategory.Property(p => p.Description)
+                    .IsRequired(false)
+                    .HasMaxLength(500)
+                    .HasDefaultValue("");
+            });
 
-            modelBuilder.Entity<Category>()
-                .Property(prop => prop.CategoryId)
-                .HasDefaultValueSql("NEWID()");
-            modelBuilder.Entity<Category>()
-                .Property(prop => prop.Description)
-                .HasDefaultValue("");
+            modelBuilder.Entity<Models.Task>(eTask =>
+            {
+                eTask.ToTable("Task");
+                eTask.HasKey(p => p.TaskId);
+                eTask.Property(p => p.TaskId)
+                    .HasDefaultValueSql("NewId()");
+                eTask.HasOne(p => p.Category)
+                    .WithMany(p => p.Tasks)
+                    .HasForeignKey(p => p.CategoryId);
+                eTask.Property(p => p.Title)
+                    .IsRequired()
+                    .HasMaxLength(150);
+                eTask.Property(p => p.Description)
+                    .IsRequired(false)
+                    .HasMaxLength(500)
+                    .HasDefaultValue("");
+                eTask.Property(eTask => eTask.PriorityTask)
+                    .HasDefaultValue(Priority.Low);
+                eTask.Property(eTask => eTask.CreationDate)
+                    .HasColumnType("DateTime")
+                    .HasDefaultValueSql("GetDate()");
+                eTask.Ignore(p => p.Summary);
+            });
         }
     }
 }
