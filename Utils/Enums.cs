@@ -6,4 +6,11 @@ namespace proj_tareas_categ.Utils
         Medium,
         High
     }
+
+    public enum Status
+    {
+        ToDo,
+        Doing,
+        Finished
+    }
 }

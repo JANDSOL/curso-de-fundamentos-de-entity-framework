@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using proj_tareas_categ.Contexts;
 
@@ -11,9 +12,10 @@ using proj_tareas_categ.Contexts;
 namespace proj_tareas_categ.Migrations
 {
     [DbContext(typeof(ContextTasks))]
-    partial class ContextTasksModelSnapshot : ModelSnapshot
+    [Migration("20221106045900_InitialData")]
+    partial class InitialData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -12,6 +12,21 @@ namespace proj_tareas_categ.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            List<Category> categoriesInit = new List<Category>();
+            categoriesInit.Add(new Category()
+                {
+                    CategoryId=Guid.Parse("2642c11b-6367-4494-b0c9-9c0785be95a1"),
+                    Name = "Hogar",
+                    Description = "Actividades cotidianas del hogar."
+                }
+            );
+            categoriesInit.Add(new Category()
+                {
+                    CategoryId=Guid.Parse("2642c11b-6367-4494-b0c9-9c0785be95a2"),
+                    Name = "Universidad"
+                }
+            );
+
             modelBuilder.Entity<Category>(eCategory =>
             {
                 eCategory.ToTable("Category");
@@ -25,7 +40,17 @@ namespace proj_tareas_categ.Contexts
                     .IsRequired(false)
                     .HasMaxLength(500)
                     .HasDefaultValue("");
+                eCategory.HasData(categoriesInit);
             });
+
+            List<Models.Task> tasksInit = new List<Models.Task>();
+            tasksInit.Add(new Models.Task()
+                {
+                    TaskId = Guid.Parse("2642c11b-6367-4494-b0c9-9c0785be95b1"),
+                    CategoryId=Guid.Parse("2642c11b-6367-4494-b0c9-9c0785be95a1"),
+                    Title = "Limpiar Cuarto",
+                }
+            );
 
             modelBuilder.Entity<Models.Task>(eTask =>
             {
@@ -43,12 +68,15 @@ namespace proj_tareas_categ.Contexts
                     .IsRequired(false)
                     .HasMaxLength(500)
                     .HasDefaultValue("");
-                eTask.Property(eTask => eTask.PriorityTask)
+                eTask.Property(p => p.PriorityTask)
                     .HasDefaultValue(Priority.Low);
-                eTask.Property(eTask => eTask.CreationDate)
+                eTask.Property(p => p.Status)
+                    .HasDefaultValue(Status.ToDo);
+                eTask.Property(p => p.CreationDate)
                     .HasColumnType("DateTime")
                     .HasDefaultValueSql("GetDate()");
                 eTask.Ignore(p => p.Summary);
+                eTask.HasData(tasksInit);
             });
         }
     }

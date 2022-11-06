@@ -16,6 +16,8 @@ namespace proj_tareas_categ.Models
 
         public Priority PriorityTask { get; set; }
 
+        public Status Status { get; set; }
+
         [
             DisplayFormat(
                 ApplyFormatInEditMode = true,

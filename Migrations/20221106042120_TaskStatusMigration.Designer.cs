@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using proj_tareas_categ.Contexts;
 
@@ -11,9 +12,10 @@ using proj_tareas_categ.Contexts;
 namespace proj_tareas_categ.Migrations
 {
     [DbContext(typeof(ContextTasks))]
-    partial class ContextTasksModelSnapshot : ModelSnapshot
+    [Migration("20221106042120_TaskStatusMigration")]
+    partial class TaskStatusMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,19 +45,6 @@ namespace proj_tareas_categ.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Category", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = new Guid("2642c11b-6367-4494-b0c9-9c0785be95a1"),
-                            Description = "Actividades cotidianas del hogar.",
-                            Name = "Hogar"
-                        },
-                        new
-                        {
-                            CategoryId = new Guid("2642c11b-6367-4494-b0c9-9c0785be95a2"),
-                            Name = "Universidad"
-                        });
                 });
 
             modelBuilder.Entity("proj_tareas_categ.Models.Task", b =>
@@ -99,17 +88,6 @@ namespace proj_tareas_categ.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Task", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            TaskId = new Guid("2642c11b-6367-4494-b0c9-9c0785be95b1"),
-                            CategoryId = new Guid("2642c11b-6367-4494-b0c9-9c0785be95a1"),
-                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PriorityTask = 0,
-                            Status = 0,
-                            Title = "Limpiar Cuarto"
-                        });
                 });
 
             modelBuilder.Entity("proj_tareas_categ.Models.Task", b =>
